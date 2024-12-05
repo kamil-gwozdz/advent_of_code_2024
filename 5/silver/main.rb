@@ -28,20 +28,18 @@ all_pages.each do |pages|
   end
 end
 
-# constraints_map[x] represents all pages greater than x
-constraints_map = {}
+constraints_hash = {}
 constraints.each do |constraint|
-  constraints_map[constraint[0]] ||= Set.new
-  constraints_map[constraint[0]] << constraint[1]
+  constraints_hash[constraint] = true
 end
 
 result = 0
 
 incorrect_pages.each do |pages|
   pages.sort! do |x, y|
-    if constraints_map[x]&.include?(y)
+    if constraints_hash[[x, y]]
       -1
-    elsif constraints_map[y]&.include?(x)
+    elsif constraints_hash[[y, x]]
       1
     else
       0
