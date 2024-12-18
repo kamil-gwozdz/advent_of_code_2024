@@ -7,20 +7,6 @@ gemfile do
   gem "dijkstra_fast"
 end
 
-class MyNetwork
-  include DijkstraFast::ShortestPath
-
-  def connections(source)
-    case source
-    when "A"
-      yield "B", 3
-      yield "C", 8
-    when "B"
-      yield "C" # Default distance 1
-    end
-  end
-end
-
 map = {}
 start_point = nil
 end_point = nil
